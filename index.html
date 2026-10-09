@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prototype: creating an Envoy workplace map with a phone camera</title>
+<title>Workplace Maps: Mobile Capture</title>
 <style>
   :root { color-scheme: light dark; }
   body {
@@ -15,10 +15,9 @@
   .sub { opacity: .6; margin: 0 0 28px; }
   .note { border-left: 3px solid; padding: 2px 0 2px 16px; opacity: .75; font-size: 16px; }
   li { margin: 6px 0; }
-  details { margin-top: 20px; }
-  summary { cursor: pointer; font-weight: 600; }
+  .see { font-size: 15px; }
 
-  /* Clips: looping silent videos, used the way GIFs would be. Clips in one block share the row. */
+  /* Clips in one block share the row. */
   .clips { display: flex; gap: 12px; margin: 12px 0 28px; align-items: flex-start; }
   .clips figure { margin: 0; flex: 1 1 0; min-width: 0; }
   .clips.phone figure { max-width: 250px; }
@@ -37,111 +36,93 @@
 </head>
 <body>
 
-<h1>Prototype: creating an Envoy workplace map with a phone camera</h1>
-<p class="sub">Show, not tell. A small experiment with Envoy Workplace Maps.</p>
-
-<p>What if you could set up a workplace map by walking the floor with your phone, with no floor plan and no drawing?</p>
+<h1>Workplace Maps: Mobile Capture</h1>
+<p class="sub">A small experiment with Envoy Workplace Maps</p>
 
 <div class="clips hero" data-clips="full-flow.mp4" data-controls></div>
 
-<p class="note">Built in an afternoon with AI coding tools, as a thought exercise and for fun. I have no inside knowledge of Envoy's constraints or priorities, so plenty here is assumption.</p>
+<p class="note">Built in an evening with Claude, simply as a thought exercise and for fun. I have no inside knowledge of Envoy's constraints or priorities, so there are plenty of assumptions in here.</p>
 
 <h2>The problem</h2>
-<p>While exploring Envoy, I spent time in Setting up Workplace Maps. I was impressed that it's self-serve. I had assumed map setup was white-glove work done by Envoy's team. Three steps stood out as slow:</p>
+<p>While exploring Envoy, I spent time in <a href="https://envoy.help/en/articles/6793105-setting-up-workplace-maps">Setting up Workplace Maps</a>. I was impressed that it's self-serve. I had assumed map setup was white-glove work done by Envoy's team. However, I noticed three things:</p>
 
-<p><strong>1. You need a floor plan to start.</strong> Not every workplace has a current one.</p>
-<div class="clips wide" data-clips="envoy-upload.mp4"></div>
+<ol>
+  <li><strong>You need a floor plan to start.</strong> Not every workplace has a current one.
+    <div class="clips wide" data-clips="https://downloads.intercomcdn.com/i/o/shgh0wrr/1524190587/fb05599a02ca0ef3f63d752e1ca9/Screenshot+2025-05-14+at+11_02_12%E2%80%AFAM.png?expires=1791520200&amp;signature=82b8a01dcfa56a9beac864ea0df8c6c9b0c20ecbd0d20b506c3adacbe6511282&amp;req=dSUlEsh3nYRXXvMW1HO4zTdb3VVmFuwScuadGD4wuKxyYoDGw0GHSB%2BgRLER%0AruIo%0A|From Envoy's help centre"></div></li>
+  <li><strong>Rooms are drawn by hand,</strong> corner by corner.
+    <div class="clips wide" data-clips="https://downloads.intercomcdn.com/i/o/shgh0wrr/1510997898/390e5ac6760033a33dbca29553d7/placingaroom.gif?expires=1791520200&amp;signature=e9cf9f05366ebbd0b3882e8a90f86c7d7aec3778a322db840d9852566aa656ea&amp;req=dSUmFsB3molWUfMW1HO4zcDPWXbSZp5nGT5Oes49aY1aXL%2FoZD%2F1iKhHu3jf%0Ar61J%0A|From Envoy's help centre"></div></li>
+  <li><strong>Everything else is placed one at a time:</strong> desks, safety equipment, amenities. This grows as customers' needs do, for example specialised equipment in a pharma lab.
+    <div class="clips wide" data-clips="https://downloads.intercomcdn.com/i/o/shgh0wrr/2449113881/19fb4c508496432c4d4038950258/draganddropdesksresources.gif?expires=1791510300&amp;signature=5169f1dcfd397941147fe3e39064556db46172badd95d2914cab610b27730cf0&amp;req=diQjH8h%2FnolXWPMW1HO4zWkKx42c8ALiYpaN9CGlv8NGdHhN2xWMbSqWvBjQ%0A2g0seXCgMHPuGqzjsYc%3D%0A|From Envoy's help centre"></div></li>
+</ol>
 
-<p><strong>2. Rooms are drawn by hand,</strong> corner by corner.</p>
-<div class="clips wide" data-clips="envoy-draw-room.mp4"></div>
-
-<p><strong>3. Everything else is placed one at a time:</strong> desks, safety equipment, amenities. This grows as customers' needs do, for example specialised equipment in a pharma lab.</p>
-<div class="clips wide" data-clips="envoy-place-desks.mp4"></div>
-
-<h2>The idea</h2>
+<h2>Opportunity</h2>
 <p>How might Envoy shorten the time from "create floor" to a published map, without the result being any worse than one made by hand?</p>
-<p>Capture the space with a phone. One walk-through gives you both the layout and what's in it.</p>
 
-<h2>What I built</h2>
+<h2>Proposal</h2>
+<p>Capture the space with a phone. One walk-through gives you both the layout and what's in it.</p>
 
 <p><strong>Two ways to start.</strong> On desktop, upload a floor plan or capture the floor with the mobile app.</p>
 <div class="clips wide" data-clips="desktop-options.png"></div>
 
-<p><strong>Walk the floor and the plan draws itself.</strong> No floor plan needed. (Sped up 8×.)</p>
-<div class="clips phone" data-clips="plan-draws.mp4"></div>
+<p><strong>Walk the floor and the plan draws itself.</strong> No floor plan needed. (Sped up.)</p>
+<div class="clips phone" data-clips="plan-draws.gif"></div>
 
 <p><strong>Things in the space are picked up and grouped.</strong></p>
-<div class="clips phone" data-clips="desk-monitors.mp4|Desk, chairs and monitors; door.mp4|Door; fire-extinguisher.mp4|Fire extinguisher"></div>
+<div class="clips phone" data-clips="desk-monitors.gif|Desk, chairs and monitors; door.gif|Door; fire-extinguisher.gif|Fire extinguisher"></div>
 
 <p><strong>Rooms are detected, not drawn.</strong></p>
-<div class="clips phone" data-clips="room-office.mp4|Office; room-living.mp4|Living room; kitchen.mp4|Kitchen"></div>
+<div class="clips phone" data-clips="room-office.gif|Office; room-living.gif|Living room; kitchen.gif|Kitchen"></div>
 
 <p><strong>Review, edit and save.</strong></p>
-<div class="clips phone" data-clips="edit-rooms.mp4|Editing rooms; edit-amenities.mp4|Editing amenities"></div>
+<div class="clips phone" data-clips="edit-rooms.gif|Editing rooms; edit-amenities.gif|Editing amenities"></div>
 
 <p>This isn't a replacement for the existing map editor. It only shortens the first draft. Editing afterwards, especially on desktop, will still be needed.</p>
 <p>Happy to demo it live. It needs an iPhone Pro, since it uses the LiDAR sensor.</p>
 
-<h2>Why it might matter</h2>
-<p>I don't see this winning more deals. It's a quality-of-life improvement for customers who have already committed, at one of their first interactions with the product: a possible "wow" moment in onboarding, and fewer support requests about map setup.</p>
-<p>If it isn't obviously faster than today's flow, it's a bad idea.</p>
-
-<h2>If this were real, where I'd start</h2>
+<h2>Assumptions</h2>
 <ol>
-  <li><strong>Is this even a problem?</strong> If most customers can get a floor plan easily, a cheaper answer is AI that reads the existing plan and tags rooms and labels. That is easier to ship and may be more accurate. Capturing only wins if plans are missing, out of date, or don't show what's actually in the space. I'd ask Support and recently onboarded customers first.</li>
-  <li><strong>Who is it for?</strong> A 20-person startup and a multi-floor enterprise or defence customer have very different spaces and tolerances.</li>
-  <li><strong>Test it with customers who recently set up a map.</strong> Was it faster? Was it as accurate? Where did capturing a space feel unfamiliar?</li>
-  <li><strong>Fix what didn't work in the prototype.</strong>
+  <li><strong>Is this even a problem?</strong> If most customers can get a floor plan easily, a cheaper answer is AI that reads the existing plan and tags rooms and labels. That is easier to ship and may be more accurate. Capturing only wins if floor plans are difficult to acquire, out of date, or don't show what's actually in the space. I'd ask Support and recently onboarded customers first.</li>
+  <li><strong>Even if it is a problem, is it worth it strategically?</strong> Maybe not. I don't see this winning more deals. It's more of a quality-of-life improvement for customers who have already committed, and it could lead to fewer support requests about map setup.</li>
+  <li><strong>If it is a problem, how might one validate it?</strong> Test it with customers who recently set up a map. Was it faster? Was it as accurate? Did they easily understand how to capture a space? Are there certain personas or customer segments that this is more helpful for?</li>
+  <li><strong>Engineering considerations.</strong>
     <ul>
       <li>Detection is narrow. Only monitors and fire extinguishers were reliable. AEDs and first aid kits failed in testing.</li>
       <li>One room at a time works. Several rooms in one pass is shaky.</li>
       <li>Untested: glass walls, large open floors, high ceilings, multiple floors. The sensor reaches about 5 m, and Apple's RoomPlan is built for rooms up to roughly 9 × 9 m.</li>
+      <li>Android and non-LiDAR devices?</li>
     </ul>
   </li>
   <li><strong>Privacy.</strong> Workplaces may not want their space recorded. Images should be used only to identify specific asset types, and not stored once the map is created.</li>
+  <li><strong>Envoy hasn't already pursued this idea.</strong></li>
+  <li><strong>GTM / Sales / Support.</strong> Onboarding could be difficult because of a new interaction that could be considered quite nascent.</li>
 </ol>
-
-<details>
-  <summary>More open questions</summary>
-  <ul>
-    <li><em>Engineering:</em> fit with the existing map stack; editability afterwards; mobile performance; Android and phones without LiDAR; whether it's worth the cost.</li>
-    <li><em>Sales and support:</em> a new interaction to teach; harder to support remotely because it happens on the customer's phone; possibly more support requests at first.</li>
-    <li><em>When is it good enough to ship?</em></li>
-  </ul>
-</details>
 
 <h2>Later</h2>
 <ul>
   <li><strong>Re-capture to update.</strong> When the floor changes, walk it again and the map updates.</li>
-  <li><strong>Less effort to capture.</strong> A handful of photos instead of a walk-through, or an agent doing it.</li>
+  <li><strong>Less effort to capture.</strong> A handful of photos instead of a walk-through.</li>
   <li><strong>Zones.</strong> The same capture could define zones within a floor.</li>
   <li><strong>3D.</strong> The capture produces a 3D model. I kept the output 2D on purpose: 3D needs a strong reason to exist, it's more to get wrong, and it's harder to render.</li>
 </ul>
 
 <h2>How I built it</h2>
-<p>I'm not an engineer. I built this with Claude Code in an afternoon, using Apple's RoomPlan for the layout and an open-source vision model (YOLO-World) to spot objects, tested at home on my own phone.</p>
+<p>Built with Claude Code, using Apple's RoomPlan for the layout and an open-source vision model (YOLO-World) to spot objects.</p>
 
 <script>
-  // Each .clips block lists files in media/, optionally with a caption: "file.mp4|Caption; other.mp4|Caption".
-  // A file that isn't there yet shows as a dashed box when the page is opened from disk, and is left
+  // Each .clips block lists files in media/, optionally with a caption: "file.gif|Caption; other.gif|Caption".
+  // Anything that fails to load shows as a dashed box when the page is opened from disk, and is left
   // out entirely on the published page.
   const published = location.protocol.startsWith("http");
   for (const block of document.querySelectorAll("[data-clips]")) {
-    for (const entry of block.dataset.clips.split(";")) {
+    for (const entry of block.dataset.clips.split("; ")) {
       const [file, caption] = entry.trim().split("|");
       const figure = document.createElement("figure");
       const isVideo = file.endsWith(".mp4");
       const media = document.createElement(isVideo ? "video" : "img");
-      media.src = `media/${file}`;
       if (isVideo) {
-        media.muted = media.playsInline = true;
-        if ("controls" in block.dataset) {
-          media.controls = true;
-          media.preload = "none";
-          media.poster = `media/${file.replace(".mp4", ".jpg")}`;
-        } else {
-          media.autoplay = media.loop = true;
-        }
+        // The full recording plays on its own, silently, with controls for anyone who wants to scrub.
+        media.muted = media.playsInline = media.autoplay = media.loop = media.controls = true;
+        media.poster = `media/${file.replace(".mp4", ".jpg")}`;
       } else {
         media.alt = caption || "";
       }
@@ -149,9 +130,11 @@
         if (published) { figure.remove(); if (!block.children.length) block.remove(); return; }
         const box = document.createElement("div");
         box.className = "missing";
-        box.textContent = `media/${file}`;
+        box.textContent = file.startsWith("http") ? "Envoy help-centre image (link no longer loads)" : `media/${file}`;
         media.replaceWith(box);
       });
+      // Envoy's own help-centre images are shown straight from Envoy's servers, not copied here.
+      media.src = file.startsWith("http") ? file : `media/${file}`;
       figure.append(media);
       if (caption) figure.insertAdjacentHTML("beforeend", `<figcaption>${caption}</figcaption>`);
       block.append(figure);
